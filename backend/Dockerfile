@@ -1,16 +1,11 @@
 FROM node:18-alpine
-
 WORKDIR /app
 
-# Pertama copy package.json untuk optimalisasi cache
+# Install dependencies
 COPY package*.json ./
+RUN npm install
 
-# Install dependencies secara eksplisit termasuk mongoose
-RUN npm install mongoose express --save
-
-# Copy semua file
+# Copy app dan run
 COPY . .
-
-EXPOSE 3000
-
-CMD ["node", "server.js"]
+EXPOSE 5000  
+CMD ["npm", "start"] 
